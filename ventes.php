@@ -147,7 +147,7 @@ if (isset($_SESSION['id']) AND $_SESSION['systeme'] = "oressource" AND (strpos($
 				<?php /*
 				<a href="remboursement.php?numero=<?php echo $_GET['numero']?>&nom=<?php echo $_GET['nom']?>&adresse=<?php echo $_GET['adresse']?>"> 
 				*/ ?>
-				<button class="btn btn-danger  pull-right" type="button" data-toggle="collapse" data-target="#collapserembou" aria-expanded="false" aria-controls="collapseExample">
+				<button class="btn btn-danger  pull-right" type="button" data-toggle="collapse" data-target="#collapserembou" aria-expanded="false" aria-controls="collapseExample" style="height: 45px;">
 				Remboursement 
 				</button>
 				<br>
@@ -166,7 +166,14 @@ if (isset($_SESSION['id']) AND $_SESSION['systeme'] = "oressource" AND (strpos($
 				</div>	
 			</ul>
 			<!-- <br><br> -->
-		</div>	
+		</div>
+		<br><br><br><br>
+		<?php if ($_SESSION['viz_caisse'] == 'oui'){ ?>
+		<div class="col-md-2 col-md-offset-2" style="width: 330px;" >
+			<a href="viz_caisse.php?numero=<?php echo $_GET['numero'] ?>" target="_blank">visualiser les <?php echo $_SESSION['nb_viz_caisse'] ?> dernieres ventes</a>
+		</div>
+		<?php }?>
+			
 	</div>    
 		<!--///// COLONNE OBJET / QUANTITE / PAD NUM / PAIEMENT / REMBOURSEMENT ////// -->   
     	<div class="col-md-3" style="width: 35%;">
@@ -296,19 +303,15 @@ if (isset($_SESSION['id']) AND $_SESSION['systeme'] = "oressource" AND (strpos($
 		           $reponse->closeCursor(); // Termine le traitement de la requête
 					?>
 					</div>
+					<!-- Boutons Encaisser -->
+					<button class="btn btn-danger btn-lg" onclick="encaisse();" style="height:70px; margin-left: 20%;">Encaisser</button>
 					<br><br>
+					<!-- Champ commentaire -->
 					<input type="text" class="form-control" name="commentaire" id="commentaire" placeholder="Commentaire">
 				</div>
 			</div>
 	
 			<br>
-			<!-- Boutons imprimer et Encaisser -->
-			<!-- <div id="bton_encaisser_rembourser"> -->
-			<ul id="boutons" class="list-group">
-				<button class="btn btn-danger btn-lg" onclick="encaisse();" style="height:70px">Encaisser</button>
-				<button class="btn btn-danger btn-lg" type="button"   align="center" onclick="printdiv('divID');" value=" Print "><span class="glyphicon glyphicon-print"></span></button> 
-			</ul>
-			<!-- </div> -->	
 	
 	   </div>
 	       
@@ -318,13 +321,15 @@ if (isset($_SESSION['id']) AND $_SESSION['systeme'] = "oressource" AND (strpos($
       	<div class="panel panel-info">
         <div class="panel-heading">
           <label class="panel-title">Ticket de caisse:</label>
-          <span class ="badge" id="recaptotal" style="float:right;">0€</span>
+          <span class ="badge" id="recaptotal" style="margin-left:20%;">0€</span>
+          <!-- Boutons imprimer -->
+          <button class="btn btn-danger btn-lg" type="button"   align="center" onclick="printdiv('divID');" value=" Print " style="margin-left:15%;"><span class="glyphicon glyphicon-print"></span></button>
         </div>
         <div class="panel-body" id="divID">
           <form action="../moteur/vente_post.php" id="formulaire" method="post">
 
 				<?php if ($_SESSION['saisiec'] == 'oui' AND (strpos($_SESSION['niveau'], 'e') !== false) ){ ?>
-				      Date de la vente:  <input type="date" id="antidate" name="antidate"  value=<?php echo date("Y-m-d") ?>> <!-- style="height:20px;" -->
+				      Date de la vente:  <input type="date" id="antidate" name="antidate"  value=<?php echo date("Y-m-d") ?>> <!-- style="height:20px;" -->     
 				<br>
 				<br>
 				<?php }?>
@@ -351,17 +356,12 @@ if (isset($_SESSION['id']) AND $_SESSION['systeme'] = "oressource" AND (strpos($
 	</div>
 </div>
 
-<?php if ($_SESSION['viz_caisse'] == 'oui'){ ?>
-     <div class="col-md-2 col-md-offset-2" style="width: 330px;" >
 
 
-  <a href="viz_caisse.php?numero=<?php echo $_GET['numero'] ?>" target="_blank">visualiser les <?php echo $_SESSION['nb_viz_caisse'] ?> dernieres ventes</a>
+<br><br><br>   
 
+<?php include "pied.php" ; ?> 
 
- </div>
-<?php }?>
- <br><br><br>   
-            <?php include "pied.php" ; ?> 
 <script>
 "use strict";
 var force_pes_vente = "non";
