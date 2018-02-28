@@ -320,10 +320,10 @@ if (isset($_SESSION['id']) AND $_SESSION['systeme'] = "oressource" AND (strpos($
 			<!-- //Ticket de caisse dynamique -->      
       	<div class="panel panel-info">
         <div class="panel-heading">
-          <label class="panel-title">Ticket de caisse:</label>
-          <span class ="badge" id="recaptotal" style="margin-left:20%;">0€</span>
+          <label class="panel-title">Total:</label>
+          <span class ="badge" id="recaptotal" style="margin-left: 8%; font-size:45px; vertical-align: middle;">0€</span>
           <!-- Boutons imprimer -->
-          <button class="btn btn-danger btn-lg" type="button"   align="center" onclick="printdiv('divID');" value=" Print " style="margin-left:15%;"><span class="glyphicon glyphicon-print"></span></button>
+          <button class="btn btn-danger btn-lg" type="button"   align="center" onclick="printdiv('divID');" value=" Print " style="float:right;"><span class="glyphicon glyphicon-print"></span></button>
         </div>
         <div class="panel-body" id="divID">
           <form action="../moteur/vente_post.php" id="formulaire" method="post">
